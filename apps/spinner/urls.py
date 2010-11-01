@@ -4,4 +4,5 @@ urlpatterns = patterns(
     'spinner.views',
     # draft
     url(r'^$','start_test', name='spinner'),
+    url(r'^thanks/$','thanks', name='spinner_thanks'),
 )

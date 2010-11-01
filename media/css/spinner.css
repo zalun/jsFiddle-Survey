@@ -7,13 +7,24 @@ input[type=text] {
     border: 1px solid #999;
     text-align: right;
 }
-#result {
+.result {
     border: 2px dashed #ccc;
     padding: 5px 10px;
     margin: 10px 0;
 }
+.test {
+  float: left;
+  width: 180px;
+}
+#b_section {
+  margin-left: 20px;
+}
 #result.xhractive {
     border-color: red;
+}
+#decision {
+  clear: both;
+  padding-top: 10px;
 }
 body {
     font-family: Helvetica;

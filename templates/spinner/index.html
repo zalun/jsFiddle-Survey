@@ -11,6 +11,7 @@
       src="/files/js/spinner.js"></script> 
   
   <link rel="stylesheet" type="text/css" href="/files/css/normalize.css"> 
+  <link rel="stylesheet" type="text/css" href="/files/css/default.css"> 
   <link rel="stylesheet" type="text/css" href="/files/css/spinner.css"> 
     
   <script type="text/javascript">
@@ -42,23 +43,21 @@
   </script>
 </head>
 <body>
-  <h1>
-  {% if thanks %}Thank you!
-  {% else %}Take a Survey
+  {% if thanks %}
+    <h1>Thank you!</h1>
+    <p id="message">You may start over if you wish (Load A)</p>
+  {% else %}
+    <h1>Take a Survey</h1>
+    <p id="message">Please click on Load A button</p>
   {% endif %}
 
-  <p id="message">
-  {% if thanks %}You may start over if you wish (Load A)
-  {% else %}Please click on Load A button
-  {% endif %}</p>
-
-  <div id="a_section">
-    <div id="a_result"><p>Section placeholder</p></div>
+  <div id="a_section" class="test">
+    <div id="a_result" class="result"><p>Section placeholder</p></div>
     <p><input type="button" id="a_load" value="Load A"></p>
   </div>
 
-  <div id="b_section">
-    <div id="b_result"><p>Section placeholder</p></div>
+  <div id="b_section" class="test">
+    <div id="b_result" class="result"><p>Section placeholder</p></div>
     <p><input type="button" id="b_load" value="Load B"></p>
   </div>
 
