@@ -25,13 +25,13 @@ def start_test(req, thanks=False, template='spinner/index.html'):
             )
             return HttpResponseRedirect(reverse('spinner_thanks'))
 
-    xhr_duration_set = ('0.2', '0.4', '1.0', '1.5')
+    xhr_duration_set = ('0.2', '0.4', '0.6', '1.0', '1.5')
     spinner_delay_set = {
-
-            '0.2': (0.0, 0.3),  # 0.3 will not show
-            '0.4': (0.0, 0.2, 0.5),  # 0.5 will not show
-            '1.0': (0.0, 0.2, 0.4),
-            '1.5': (0.0, 0.2, 0.4)
+            '0.2': (0.0, 0.3),              # 0.3 will not show
+            '0.4': (0.0, 0.2, 0.5),         # 0.5 will not show
+            '0.6': (0.0, 0.2, 0.4, 0.7),    # 0.7 will not show
+            '1.0': (0.0, 0.2, 0.4, 0.6),
+            '1.5': (0.0, 0.2, 0.4, 0.6)
             }
 
     xhr_duration = random.choice(xhr_duration_set)
