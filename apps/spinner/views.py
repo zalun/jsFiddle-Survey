@@ -37,8 +37,6 @@ def start_test(req, thanks=False, template='spinner/index.html'):
     spinner_delay_b = random.choice(spinner_delay_set[str(xhr_duration)])
     xhr_duration = float(xhr_duration)
 
-    print thanks
-
     return render_to_response(template, {
         'xhr_duration': xhr_duration,
         'spinner_delay_a': spinner_delay_a,
@@ -51,5 +49,4 @@ def thanks(req):
     """
     Show thanks with ability to take the survey again
     """
-    print "thanks"
     return start_test(req, thanks=True)
