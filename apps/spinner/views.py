@@ -7,7 +7,7 @@ from django.template import RequestContext
 
 from spinner.models import Result as SpinnerResult
 
-def start_test(req, thanks=False, template='spinner/index.html'):
+def start_test(req, stage='start', template_prefix='spinner/'):
     """
     Display test with random values
     Get results from the POST if any
@@ -21,9 +21,13 @@ def start_test(req, thanks=False, template='spinner/index.html'):
                 xhr_duration=req.POST.get('xhr_duration'),
                 spinner_delay_a=req.POST.get('spinner_delay_a'),
                 spinner_delay_b=req.POST.get('spinner_delay_b'),
-                faster=req.POST.get('faster')
+                faster=req.POST.get('faster'),
+                broken=req.POST.get('broken', False)
             )
             return HttpResponseRedirect(reverse('spinner_thanks'))
+        else:
+            return HttpResponseRedirect(reverse('spinner_failed'))
+
 
     xhr_duration_set = ('0.2', '0.4', '0.6', '1.0', '1.5')
     spinner_delay_set = {
@@ -39,11 +43,11 @@ def start_test(req, thanks=False, template='spinner/index.html'):
     spinner_delay_b = random.choice(spinner_delay_set[str(xhr_duration)])
     xhr_duration = float(xhr_duration)
 
-    return render_to_response(template, {
+    return render_to_response('%sindex.html' % template_prefix, {
         'xhr_duration': xhr_duration,
         'spinner_delay_a': spinner_delay_a,
         'spinner_delay_b': spinner_delay_b,
-        'thanks': thanks
+        'stage_template': '%s_%s.html' % (template_prefix, stage)
         }, context_instance=RequestContext(req))
 
 
@@ -51,4 +55,10 @@ def thanks(req):
     """
     Show thanks with ability to take the survey again
     """
-    return start_test(req, thanks=True)
+    return start_test(req, stage='thanks')
+
+def failure(req):
+    """
+    Show thanks with ability to take the survey again
+    """
+    return start_test(req, stage='error')

@@ -45,13 +45,7 @@
   </script>
 </head>
 <body>
-  {% if thanks %}
-    <h1>Thank you!</h1>
-    <p id="message">You may start over if you wish (Load A)</p>
-  {% else %}
-    <h1>Take a Survey.</h1>
-    <p id="message">Please click on the "Load A" button</p>
-  {% endif %}
+  {% include stage_template %}
 
   <div id="a_section" class="test">
     <div id="a_result" class="result"><p>Placeholder</p></div>
@@ -69,12 +63,22 @@
       <input type="hidden" name="xhr_duration" value="{{ xhr_duration }}">
       <input type="hidden" name="spinner_delay_a" value="{{ spinner_delay_a }}">
       <input type="hidden" name="spinner_delay_b" value="{{ spinner_delay_b }}">
-      <p><input type="radio" name="faster" value="a"> 
-          Action A seemed faster </p>
-      <p><input type="radio" name="faster" value="b"> 
-          Action B seemed faster </p>
-      <p><input type="radio" name="faster" value="-"> 
-          Both action took the same time </p>
+      <p>
+        <input type="radio" id="a_faster" name="faster" value="a"> 
+        <label for='a_faster'>Action A seemed faster</label>
+      </p>
+      <p>
+        <input type="radio" id="b_faster" name="faster" value="b"> 
+        <label for="b_faster">Action B seemed faster</label>
+      </p>
+      <p>
+        <input type="radio" id="no_faster" name="faster" value="-"> 
+        <label for="no_faster">Both action took the same time</label>
+      </p>
+      <p>
+        <input type='checkbox' id="broken" name='broken'>
+        <label for="broken">Did any of the actions seemed unresponsive?</label>
+      </p>
       <p><input type="submit" id="send_result" value="Send">
     </fieldset>
   </form>
