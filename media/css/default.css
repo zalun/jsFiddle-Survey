@@ -15,6 +15,10 @@ h1, p {
 a {
   color: #5AA4D7;
 }
+#message {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 #explanation {
   color: #777;
   font-size: 0.8em;
