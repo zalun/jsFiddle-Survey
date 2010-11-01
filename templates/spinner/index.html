@@ -1,5 +1,81 @@
-<h1>Survey</h1>
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <title>Perceiving Ajax Performance - Spinner - jsFiddle demo</title> 
+  <script type="text/javascript" 
+    src="/files/js/lib/mootools-core-1.3.js"></script> 
+  <script type="text/javascript" 
+      src="/files/js/lib/mootools-more-1.3.js"></script> 
+  <script type="text/javascript" 
+      src="/files/js/spinner.js"></script> 
+  
+  <link rel="stylesheet" type="text/css" href="/files/css/normalize.css"> 
+  <link rel="stylesheet" type="text/css" href="/files/css/spinner.css"> 
+    
+  <script type="text/javascript">
+    xhr_duration = {{ xhr_duration }};
+    spinner_delay_a = {{ spinner_delay_a }};
+    spinner_delay_b = {{ spinner_delay_b }};
 
-<p>XHR Duration: {{ xhr_length }}</p>
-<p>Spinner Delay: {{ spinner_delay_a }}, {{ spinner_delay_b }}</p>
+    window.addEvent('domready', function() {
+      $('decision').hide();
+      $('message').highlight();
+      $('a_load').addEvent('click', function(event) {
+        event.stop();
+        newRequest({{ xhr_duration }}, {{ spinner_delay_a }}, $('a_result'),
+          function() {
+            $('message').highlight().set('text', 'Please click on Load B button');
+            // switch on B
+            $('b_load').addEvent('click', function(event) {
+              event.stop();
+              newRequest({{ xhr_duration }}, {{ spinner_delay_b }}, $('b_result'),
+                function() {
+                  $('message').highlight().set('text', 
+                    'Please decide which action seemed faster');
+                  $('decision').show();
+                });
+            }); 
+          });
+      }); 
+    });
+  </script>
+</head>
+<body>
+  <h1>
+  {% if thanks %}Thank you!
+  {% else %}Take a Survey
+  {% endif %}
 
+  <p id="message">
+  {% if thanks %}You may start over if you wish (Load A)
+  {% else %}Please click on Load A button
+  {% endif %}</p>
+
+  <div id="a_section">
+    <div id="a_result"><p>Section placeholder</p></div>
+    <p><input type="button" id="a_load" value="Load A"></p>
+  </div>
+
+  <div id="b_section">
+    <div id="b_result"><p>Section placeholder</p></div>
+    <p><input type="button" id="b_load" value="Load B"></p>
+  </div>
+
+  <form id="decision" action="{% url spinner %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <input type="hidden" name="xhr_duration" value="{{ xhr_duration }}">
+      <input type="hidden" name="spinner_delay_a" value="{{ spinner_delay_a }}">
+      <input type="hidden" name="spinner_delay_b" value="{{ spinner_delay_b }}">
+      <p><input type="radio" name="faster" value="a"> 
+          Action A seemed faster </p>
+      <p><input type="radio" name="faster" value="b"> 
+          Action B seemed faster </p>
+      <p><input type="radio" name="faster" value="-"> 
+          Both action took the same time </p>
+      <p><input type="submit" id="send_result" value="Send">
+    </fieldset>
+  </form>
+</body>
+</html>
