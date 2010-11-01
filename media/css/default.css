@@ -3,7 +3,26 @@ body {
     font-family: helvetica;
     margin: 10px 20px;;
     width: 400px;
+    font-size: 14px;
 }
 h1 {
     font-size: 1.8em;
+}
+h1, p {
+  margin: 5px 2px;
+  padding: 0 10px;
+}
+a {
+  color: #5AA4D7;
+}
+#explanation {
+  color: #777;
+  font-size: 0.8em;
+  clear: both;
+}
+#explanation p {
+  margin: 3px 0;
+}
+#explanation p.first {
+  padding-top: 25px;
 }

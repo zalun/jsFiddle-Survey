@@ -26,14 +26,15 @@
         event.stop();
         newRequest({{ xhr_duration }}, {{ spinner_delay_a }}, $('a_result'),
           function() {
-            $('message').highlight().set('text', 'Please click on Load B button');
+          $('message').highlight().set('text', 
+            'Now please click on the "Load B" button');
             // switch on B
             $('b_load').addEvent('click', function(event) {
               event.stop();
               newRequest({{ xhr_duration }}, {{ spinner_delay_b }}, $('b_result'),
                 function() {
                   $('message').highlight().set('text', 
-                    'Please decide which action seemed faster');
+                    'Decide which action seemed faster and you\'re done.');
                   $('decision').show();
                 });
             }); 
@@ -47,8 +48,8 @@
     <h1>Thank you!</h1>
     <p id="message">You may start over if you wish (Load A)</p>
   {% else %}
-    <h1>Take a Survey</h1>
-    <p id="message">Please click on Load A button</p>
+    <h1>Take a Survey.</h1>
+    <p id="message">Please click on the "Load A" button</p>
   {% endif %}
 
   <div id="a_section" class="test">
@@ -76,5 +77,15 @@
       <p><input type="submit" id="send_result" value="Send">
     </fieldset>
   </form>
+  <div id="explanation">
+    <p class="first">
+    This is a simple test to check which of the actions performs faster.
+    There is no contest. No private data is collected. 
+    </p>
+    <p>Results will be presented at 
+    <a href="http://londonajax.com" target="_top">London Ajax User Group</a>,
+    published and available for everyone.
+    </p>
+  </div>
 </body>
 </html>

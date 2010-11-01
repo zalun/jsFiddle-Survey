@@ -7,14 +7,18 @@ input[type=text] {
     border: 1px solid #999;
     text-align: right;
 }
+.test {
+  float: left;
+  width: 190px;
+}
 .result {
     border: 2px dashed #ccc;
     padding: 5px 10px;
     margin: 10px 0;
 }
-.test {
-  float: left;
-  width: 180px;
+.result p {
+  padding: 0;
+  margin: 0;
 }
 #b_section {
   margin-left: 20px;
