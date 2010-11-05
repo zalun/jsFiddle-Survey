@@ -11,14 +11,14 @@
 <p>
   <a href="{% url spinner_start %}">Take the survey</a> |
   <a href="{% url spinner_data %}">Download raw data</a> |
-  <a href="/file/download/PerceivingAjaxPerformace.pdf">Slides</a>
+  <a href="/files/download/PerceivingAjaxPerformace.pdf">Slides</a>
 </p>
 <p>
 Check how delaying spinner affects duration of the Ajax request.<br/>
 In the test user is perceiving two actions starting after a click. Both of 
 them have the same duration (0.2s, 0.4s, 0.6s, 1.0s or 1.5s). Spinner is 
 delayed by a random time chosen from the set of (0.2s, 0.4s, 0.6s) and is seen 
-only if delay is shorten than the action duration.<br/>
+only if delay is shorter than the action duration.<br/>
 User has to choose which action performed faster and if any action felt
 unresponsive. The fact that the actions took the same time is unknown to the 
 user.
