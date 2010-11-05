@@ -7,6 +7,28 @@ from django.template import RequestContext
 
 from spinner.models import Result as SpinnerResult
 
+
+def index(req, template_prefix='spinner/'):
+    """
+    Display the Survey info
+    """
+
+    return render_to_response('%sindex.html' % template_prefix, {},
+            context_instance=RequestContext(req))
+
+def get_data(req, template_prefix='spinner/'):
+    """
+    Return all data as csv
+    """
+    response = render_to_response('%sresults.csv' % template_prefix, {
+        'results': SpinnerResult.objects.all()})
+
+    response['Content-Disposition'] = ("attachment; "
+        "filename=spinner_survey_results.csv")
+
+    return response
+    #    mimetype='application/Excel')
+
 def start_test(req, stage='start', template_prefix='spinner/'):
     """
     Display test with random values
@@ -43,7 +65,7 @@ def start_test(req, stage='start', template_prefix='spinner/'):
     spinner_delay_b = random.choice(spinner_delay_set[str(xhr_duration)])
     xhr_duration = float(xhr_duration)
 
-    return render_to_response('%sindex.html' % template_prefix, {
+    return render_to_response('%stest.html' % template_prefix, {
         'xhr_duration': xhr_duration,
         'spinner_delay_a': spinner_delay_a,
         'spinner_delay_b': spinner_delay_b,

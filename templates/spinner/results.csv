@@ -1,0 +1,3 @@
+duration, spinner delay A, spinner delay B, faster, broken, time
+{% for result in results %}{{ result.csv }}
+{% endfor %}

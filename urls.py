@@ -2,17 +2,23 @@ from django.conf.urls.defaults import *
 from django.views import static
 from django.conf import settings
 
+from spinner import views as spinner_views
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+
+    # main page
+    url(r'^$', spinner_views.start_test),
+
     # media
     url(r'^files/(?P<path>.*)$', static.serve,
         {'document_root': settings.MEDIA_ROOT}, name='media'),
 
     # spinner
-    (r'^', include('spinner.urls')),
+    (r'^spinner/', include('spinner.urls')),
 
     # echo
     (r'^echo/', include('echo.urls')),

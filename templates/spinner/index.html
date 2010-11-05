@@ -1,97 +1,27 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-  <title>Perceiving Ajax Performance - Spinner Survey</title> 
-  <script type="text/javascript" 
-    src="/files/js/lib/mootools-core-1.3.js"></script> 
-  <script type="text/javascript" 
-      src="/files/js/lib/mootools-more-1.3.js"></script> 
-  <script type="text/javascript" 
-      src="/files/js/spinner.js"></script> 
-  
-  <link rel="stylesheet" type="text/css" href="/files/css/normalize.css"> 
-  <link rel="stylesheet" type="text/css" href="/files/css/default.css"> 
-  <link rel="stylesheet" type="text/css" href="/files/css/spinner.css"> 
+{% extends "base.html" %}
+
+{% block title %}Perceiving Ajax Performance - Spinner Survey{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="/files/css/spinner.css">{% endblock %}
     
-  <script type="text/javascript">
-    xhr_duration = {{ xhr_duration }};
-    spinner_delay_a = {{ spinner_delay_a }};
-    spinner_delay_b = {{ spinner_delay_b }};
-    Asset.image('/files/img/spinner.gif');
+{% block head %}
+{% endblock %}
 
-    window.addEvent('domready', function() {
-      $('decision').hide();
-      $('message').highlight();
-      $('a_load').addEvent('click', function(event) {
-        event.stop();
-        newRequest({{ xhr_duration }}, {{ spinner_delay_a }}, $('a_result'),
-          function() {
-          $('message').highlight().set('text', 
-            'Now please click on the "Load B" button');
-            // switch on B
-            $('b_load').addEvent('click', function(event) {
-              event.stop();
-              newRequest({{ xhr_duration }}, {{ spinner_delay_b }}, $('b_result'),
-                function() {
-                  $('message').highlight().set('text', 
-                    'Decide which action seemed faster and you\'re done.');
-                  $('decision').show();
-                });
-            }); 
-          });
-      }); 
-    });
-  </script>
-</head>
-<body>
-  {% include stage_template %}
+{% block body %} 
+<h1>Spinner Survey</h1>
+<p>
+  <a href="{% url spinner_start %}">Take the survey</a> |
+  <a href="{% url spinner_data %}">Download raw data</a> |
+  <a href="/file/download/PerceivingAjaxPerformace.pdf">Slides</a>
+</p>
+<p>
+Check how delaying spinner affects duration of the Ajax request.<br/>
+In the test user is perceiving two actions starting after a click. Both of 
+them have the same duration (0.2s, 0.4s, 0.6s, 1.0s or 1.5s). Spinner is 
+delayed by a random time chosen from the set of (0.2s, 0.4s, 0.6s) and is seen 
+only if delay is shorten than the action duration.<br/>
+User has to choose which action performed faster and if any action felt
+unresponsive. The fact that the actions took the same time is unknown to the 
+user.
+</p>
 
-  <div id="a_section" class="test">
-    <div id="a_result" class="result"><p>Placeholder</p></div>
-    <p><input type="button" id="a_load" value="Load A"></p>
-  </div>
-
-  <div id="b_section" class="test">
-    <div id="b_result" class="result"><p>Placeholder</p></div>
-    <p><input type="button" id="b_load" value="Load B"></p>
-  </div>
-
-  <form id="decision" action="{% url spinner %}" method="post">
-    {% csrf_token %}
-    <fieldset>
-      <input type="hidden" name="xhr_duration" value="{{ xhr_duration }}">
-      <input type="hidden" name="spinner_delay_a" value="{{ spinner_delay_a }}">
-      <input type="hidden" name="spinner_delay_b" value="{{ spinner_delay_b }}">
-      <p>
-        <input type="radio" id="a_faster" name="faster" value="a"> 
-        <label for='a_faster'>Action A seemed faster</label>
-      </p>
-      <p>
-        <input type="radio" id="b_faster" name="faster" value="b"> 
-        <label for="b_faster">Action B seemed faster</label>
-      </p>
-      <p>
-        <input type="radio" id="no_faster" name="faster" value="-"> 
-        <label for="no_faster">Both action took the same time</label>
-      </p>
-      <p>
-        <input type='checkbox' id="broken" name='broken'>
-        <label for="broken">Did any of the actions seemed unresponsive?</label>
-      </p>
-      <p><input type="submit" id="send_result" value="Send">
-    </fieldset>
-  </form>
-  <div id="explanation">
-    <p class="first">
-    This is a simple test to check which of the actions performs faster.
-    There is no contest. No private data is collected. 
-    </p>
-    <p>Results will be presented at 
-    <a href="http://londonajax.com" target="_top">London Ajax User Group</a>,
-    <strong>published along with all collected data</strong> and available 
-    for everyone.
-    </p>
-  </div>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <title>{% block title %}{% endblock %}</title> 
+  <script type="text/javascript" 
+    src="/files/js/lib/mootools-core-1.3.js"></script> 
+  <script type="text/javascript" 
+      src="/files/js/lib/mootools-more-1.3.js"></script> 
+  <script type="text/javascript" 
+      src="/files/js/spinner.js"></script> 
+  
+  <link rel="stylesheet" type="text/css" href="/files/css/normalize.css"> 
+  <link rel="stylesheet" type="text/css" href="/files/css/default.css"> 
+  {% block css %}{% endblock %}
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+  {% block body %}{% endblock %}
+</body>
+</html>
+
