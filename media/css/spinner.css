@@ -53,3 +53,9 @@ body {
 	height: 24px;
 	margin: 0 auto;
 }
+table.result td {
+    width: 2.5em;
+}
+table.result td.broken {
+    color: red;
+}

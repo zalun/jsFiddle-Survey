@@ -8,7 +8,11 @@ body {
 h1 {
     font-size: 1.8em;
 }
-h1, p {
+h2 {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+h1, , h2, p {
   margin: 5px 2px;
   padding: 0 10px;
 }
@@ -32,4 +36,18 @@ a {
 }
 #explanation p.first {
   padding-top: 25px;
+}
+table.result {
+  border: 2px solid #777
+}
+table.result td,
+table.result th{
+  padding: 3px 5px;
+  border: 1px solid #777;
+}
+table.result td.diagonal {
+  background-color: #ccc
+}
+.number {
+  text-align: right;
 }

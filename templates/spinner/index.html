@@ -10,7 +10,8 @@
 <h1>Spinner Survey</h1>
 <p>
   <a href="{% url spinner_start %}">Take the survey</a> |
-  <a href="{% url spinner_data %}">Download raw data</a> |
+  <a href="{% url spinner_data %}">raw data</a> |
+  <a href="{% url spinner_results %}">live results</a> |
   <a href="/files/download/PerceivingAjaxPerformance.pdf">Slides</a>
 </p>
 <p>
@@ -22,6 +23,9 @@ only if delay is shorter than the action duration.<br/>
 User has to choose which action performed faster and if any action felt
 unresponsive. The fact that the actions took the same time is unknown to the 
 user.
+</p>
+<p>
+Please contact <a href='http://twitter.com/zalun'>@zalun</a> if you'd like to discuss methodology or results
 </p>
 
 {% endblock %}

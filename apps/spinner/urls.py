@@ -8,4 +8,5 @@ urlpatterns = patterns(
     url(r'^thanks/$','thanks', name='spinner_thanks'),
     url(r'^fail/$','failure', name='spinner_failed'),
     url(r'^data/$','get_data', name='spinner_data'),
+    url(r'^results/$','results', name='spinner_results'),
 )

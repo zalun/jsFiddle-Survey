@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load extras %}
+
+{% block title %}Perceiving Ajax Performance - Spinner Survey{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="/files/css/spinner.css">{% endblock %}
+    
+{% block head %}
+{% endblock %}
+
+{% block body %} 
+<h1>Spinner Survey Results</h1>
+<p>
+  <a href="{% url spinner_home %}">Home</a>
+</p>
+
+<h2>Comparing Spinner delays keeping order of actions</h2> 
+<p>
+top (action A) faster than left (action B)
+</p>
+<table class='result'>
+  <thead border=1>
+    <tr><th></th>{% for l in labels %}<th class='number'>{{ l }}</th>{% endfor %}</tr>
+  </thead>
+  <tbody>
+    {% for lb in labels %}
+    <tr>
+      <td class='number'>{{ lb }}</td>
+      {% for la in labels %}
+      {% with faster_order|dictget:lb|dictget:la as item %}
+      {% with item|listitem:0|intpercent as result %} 
+      {% with item|listitem:1 as broken %}
+      <td class='number{% ifequal la lb %} diagonal{% endifequal %}{% if broken >= 10 %} broken{% endif %}'>
+        {% if result %}{{ result }}{% endif %}
+      </td>
+      {% endwith %}{% endwith %}{% endwith %}
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p>Feels broken or unresponsive</p>
+<table class='result'>
+  <thead border=1>
+    <tr><th></th>{% for l in labels %}<th class='number'>{{ l }}</th>{% endfor %}</tr>
+  </thead>
+  <tbody>
+    {% for lb in labels %}
+    <tr>
+      <td class='number'>{{ lb }}</td>
+      {% for la in labels %}
+      <td class='number{% ifequal la lb %} diagonal{% endifequal %}'>
+        {% with faster_order|dictget:lb|dictget:la as item %}
+        {% with item|listitem:0|intpercent as result %} 
+        {% with item|listitem:1|intpercent as broken %}
+        {% if result %}{{ broken }}{% endif %}
+        {% endwith %}{% endwith %}{% endwith %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<h2>Comparing Spinner delays regardless the actions order</h2> 
+<p>
+top faster than left
+</p>
+<table class='result'>
+  <thead border=1>
+    <tr><th></th>{% for l in labels %}{% if l != '0.0' %}<th class='number'>{{ l }}</th>{% endif %}{% endfor %}</tr>
+  </thead>
+  <tbody>
+    {% for lb in labels %}
+    <tr>
+      <td class='number'>{{ lb }}</td>
+      {% for la in labels %}{% if la != '0.0' %}
+      {% with faster_no_order|dictget:lb|dictget:la as item %}
+      {% with item|listitem:0|intpercent as result %} 
+      {% with item|listitem:1 as broken %}
+      <td class='number{% ifequal la lb %} diagonal{% endifequal %}{% if broken >= 10 %} broken{% endif %}'>
+        {% if result and la >= lb %}{{ result }}{% endif %}
+      </td>
+      {% endwith %}{% endwith %}{% endwith %}
+      {% endif %}{% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p>Feels broken or unresponsive</p>
+<table class='result'>
+  <thead border=1>
+    <tr><th></th>{% for l in labels %}{% if l != '0.0' %}<th class='number'>{{ l }}</th>{% endif %}{% endfor %}</tr>
+  </thead>
+  <tbody>
+    {% for lb in labels %}
+    <tr>
+      <td class='number'>{{ lb }}</td>
+      {% for la in labels %}{% if la != '0.0' %}
+      <td class='number{% ifequal la lb %} diagonal{% endifequal %}'>
+        {% with faster_no_order|dictget:lb|dictget:la as item %}
+        {% with item|listitem:0|intpercent as result %} 
+        {% with item|listitem:1|intpercent as broken %}
+        {% if result and la >= lb %}{{ broken }}{% endif %}
+        {% endwith %}{% endwith %}{% endwith %}
+      </td>
+      {% endif %}{% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
