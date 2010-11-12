@@ -34,10 +34,10 @@ def results(req, template_prefix='spinner/'):
     """
     Collect results and present in tabular form
     """
-    #             A      A    A     A
-    #table = [        ['0.0','0.2','0.4','0.6'],
-    # B        ['0.0',   2, 66,   12,   25],
-    # B        ['0.2',      1,  12,   1,  1]
+    #                    A      A    A     A
+    #table = [       ['0.0','0.2','0.4','0.6'],
+    # B        ['0.0',   2,   66,   12,   25],
+    # B        ['0.2',   1,   12,    1,    1]
     # B       ...
     #        ]
     faster_no_order = {}
@@ -122,6 +122,7 @@ def results(req, template_prefix='spinner/'):
     return render_to_response('%sresults.html' % template_prefix, {
         'faster_order': faster_order,
         'faster_no_order': faster_no_order,
+        'overall': SpinnerResult.objects.count(),
         'labels': label
     }, context_instance=RequestContext(req))
 

@@ -10,8 +10,14 @@
 {% block body %} 
 <h1>Spinner Survey Results</h1>
 <p>
-  <a href="{% url spinner_home %}">Home</a>
+  <a href="{% url spinner_home %}">Home</a> |
+  <a href="{% url spinner_start %}">Take the survey</a> |
+  <a href="{% url spinner_data %}">Raw data</a> |
+  <a href="/files/download/PerceivingAjaxPerformance.pdf">Slides</a>
 </p>
+
+<p><strong>{{ overall }}</strong> entries in total.</p>
+<p>Results are calculated using an equation: <br/>(faster - slower) / overall * 100</p>
 
 <h2>Comparing Spinner delays keeping order of actions</h2> 
 <p>
