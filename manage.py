@@ -3,6 +3,12 @@ import site
 import os
 import random
 
+# import optional environment settings
+try:
+    import env_local
+except:
+    raise
+
 random.seed()
 
 from django.core.management import execute_manager
